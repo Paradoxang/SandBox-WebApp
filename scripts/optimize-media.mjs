@@ -15,7 +15,10 @@ import sharp from 'sharp';
 
 // nombre del archivo en assets-src → cómo debe salir
 const TARGETS = {
-  'hero-original': { out: 'hero', ratio: 1, widths: [1024, 640] },
+  // El hero llega ya apaisado (1024×572): se respeta su encuadre tal cual,
+  // sin recortar, y no se generan anchos mayores porque solo serían un
+  // reescalado del original.
+  'hero-original': { out: 'hero', ratio: 1024 / 572, widths: [1024, 640] },
   'servicio-diseno': { out: 'servicio-diseno', ratio: 4 / 3, widths: [1200, 800] },
   'servicio-mantenimiento': { out: 'servicio-mantenimiento', ratio: 4 / 3, widths: [1200, 800] },
   'contacto-fondo': { out: 'contacto-fondo', ratio: 16 / 9, widths: [1600, 900] },

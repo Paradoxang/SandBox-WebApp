@@ -36,7 +36,7 @@ export default function Hero({ ready }) {
           srcSet={HERO_SRCSET}
           sizes={HERO_SIZES}
           width={1024}
-          height={1024}
+          height={572}
           alt="Isla flotante de tierra con helechos y musgo, mostrando el corte del suelo y sus raíces"
           fetchPriority="high"
           decoding="sync"
