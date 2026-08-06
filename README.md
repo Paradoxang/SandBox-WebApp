@@ -27,12 +27,12 @@ src/
   components/
     Preloader.jsx        Pantalla de carga
     Nav.jsx              Navegación + menú móvil a pantalla completa
-    Hero.jsx             Hero con parallax + cinta infinita
-    Manifesto.jsx        Texto que se revela palabra a palabra al hacer scroll
-    Practices.jsx        Seis prácticas jardineras
-    Services.jsx         Servicios + proceso en cuatro pasos
-    Projects.jsx         Carrusel de proyectos + diario
-    Footer.jsx           CTA de contacto + pie con wordmark gigante
+    Hero.jsx             Hero a sangre completa con parallax + cinta infinita
+    Manifesto.jsx        Manifiesto centrado que se enfoca y desenfoca al pasar
+    Practices.jsx        Seis prácticas que entran alternando lados
+    Services.jsx         Servicios (relleno al hover) + proceso con flotantes
+    Projects.jsx         Carrusel con flechas + diario
+    Footer.jsx           Contacto directo + pie con wordmark gigante
     ui.jsx               Primitivas compartidas
 public/demo-mala/        La demo antigua de mal responsive (ver abajo)
 ```

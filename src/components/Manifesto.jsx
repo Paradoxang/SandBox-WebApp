@@ -1,30 +1,41 @@
-import { MANIFESTO, STATS } from '../data/site';
-import { Counter, Label, Reveal, ScrollWords } from './ui';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform, useReducedMotion } from 'motion/react';
+import { MANIFESTO } from '../data/site';
+import { Label } from './ui';
 
+/**
+ * Manifiesto centrado.
+ *
+ * Ocupa dos pantallas de alto y el texto queda fijo en el centro mientras
+ * pasas por él: primero entra enfocándose, se sostiene, y al salir se
+ * desenfoca y se desvanece. El desenfoque va ligado al scroll, no al tiempo,
+ * así que el ritmo lo marca la persona que lee.
+ */
 export default function Manifesto() {
+  const ref = useRef(null);
+  const reduced = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] });
+
+  const opacity = useTransform(scrollYProgress, [0, 0.18, 0.62, 0.95], [0, 1, 1, 0]);
+  const blurPx = useTransform(scrollYProgress, [0, 0.18, 0.62, 0.95], [14, 0, 0, 18]);
+  const filter = useTransform(blurPx, (v) => `blur(${v}px)`);
+  const scale = useTransform(scrollYProgress, [0, 0.18, 0.62, 0.95], [0.94, 1, 1, 1.06]);
+
+  const estatico = { opacity: 1, filter: 'none', scale: 1 };
+
   return (
-    <section className="bg-forest py-[clamp(5rem,14vw,11rem)]">
-      <div className="shell">
-        <Reveal>
+    <section id="vision" ref={ref} className="relative h-[200svh] bg-forest">
+      {/* Se queda pegado en el centro de la pantalla mientras dura la sección */}
+      <div className="sticky top-0 flex h-[100svh] items-center justify-center px-6">
+        <motion.div
+          style={reduced ? estatico : { opacity, filter, scale }}
+          className="mx-auto max-w-5xl text-center"
+        >
           <Label>NUESTRA VISIÓN</Label>
-        </Reveal>
-
-        {/* El texto se ilumina palabra a palabra conforme bajas */}
-        <ScrollWords
-          text={MANIFESTO}
-          className="display mt-10 max-w-5xl text-[clamp(1.6rem,4.4vw,3.4rem)] text-bone"
-        />
-
-        <div className="mt-[clamp(3.5rem,8vw,7rem)] grid grid-cols-2 gap-y-10 border-t border-bone/10 pt-12 lg:grid-cols-4">
-          {STATS.map((s, i) => (
-            <Reveal key={s.label} delay={i * 0.08} className="pr-4">
-              <p className="display text-[clamp(2.2rem,5vw,3.6rem)] text-lime">
-                <Counter value={s.value} />
-              </p>
-              <p className="label mt-3 text-bone/50">{s.label}</p>
-            </Reveal>
-          ))}
-        </div>
+          <p className="display mt-8 text-[clamp(1.6rem,4.6vw,3.6rem)] text-bone text-balance">
+            {MANIFESTO}
+          </p>
+        </motion.div>
       </div>
     </section>
   );

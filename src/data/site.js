@@ -9,7 +9,7 @@ const u = (id, w = 1200) =>
 // WebP baja a 92 kB, y la variante de 640 a 40 kB para móvil.
 export const HERO_IMG = '/hero-1024.webp';
 export const HERO_SRCSET = '/hero-640.webp 640w, /hero-1024.webp 1024w';
-export const HERO_SIZES = '(max-width: 1024px) 92vw, 46vw';
+export const HERO_SIZES = '100vw';
 
 export const NAV_LINKS = [
   { label: 'Prácticas', href: '#practicas' },
@@ -31,11 +31,37 @@ export const TICKER = [
 export const MANIFESTO =
   'Un jardín no se decora: se cultiva. Diseñamos sistemas vivos que mejoran con el tiempo — suelo que respira, especies que pertenecen al lugar y un mantenimiento que cada año pide menos, no más.';
 
-export const STATS = [
-  { value: '120+', label: 'jardines entregados' },
-  { value: '18', label: 'años de práctica' },
-  { value: '-64%', label: 'consumo de agua medio' },
-  { value: '0', label: 'pesticidas de síntesis' },
+export const CONTACT_LINKS = [
+  {
+    kind: 'WhatsApp',
+    handle: '+57 318 981 9384',
+    href: 'https://wa.me/573189819384',
+    icon: 'whatsapp',
+  },
+  {
+    kind: 'Instagram',
+    handle: '@Paradoxxan',
+    href: 'https://instagram.com/Paradoxxan',
+    icon: 'instagram',
+  },
+  {
+    kind: 'Portfolio',
+    handle: 'doxdesigns.dev',
+    href: 'https://doxdesigns.dev/',
+    icon: 'globe',
+  },
+];
+
+// Imágenes que flotan alrededor del proceso. `pos` son coordenadas en
+// porcentaje dentro de la sección; `depth` regula cuánto se mueve cada una
+// con el scroll, para dar sensación de planos distintos.
+export const FLOATERS = [
+  { img: u('1416879595882-3373a0480b5b', 400), pos: { top: '6%', left: '3%' }, size: 'w-28 lg:w-44', depth: 40 },
+  { img: u('1523348837708-15d4a09cfac2', 400), pos: { top: '2%', right: '6%' }, size: 'w-24 lg:w-36', depth: -55 },
+  { img: u('1485955900006-10f4d324d411', 400), pos: { top: '38%', left: '-2%' }, size: 'w-20 lg:w-32', depth: -30 },
+  { img: u('1518977676601-b53f82aba655', 400), pos: { bottom: '8%', left: '8%' }, size: 'w-28 lg:w-40', depth: 60 },
+  { img: u('1471193945509-9ad0617afabf', 400), pos: { bottom: '4%', right: '4%' }, size: 'w-32 lg:w-48', depth: 35 },
+  { img: u('1467043198406-dc953a3defa0', 400), pos: { top: '44%', right: '-1%' }, size: 'w-20 lg:w-28', depth: -45 },
 ];
 
 export const PRACTICES = [

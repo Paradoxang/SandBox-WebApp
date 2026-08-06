@@ -1,12 +1,29 @@
-import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Label, Reveal } from './ui';
+import { CONTACT_LINKS } from '../data/site';
 import { scrollToId } from '../hooks/useLenis';
+
+const ICONOS = {
+  whatsapp: (
+    <path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5v-.5c-.1-.2-.7-1.6-.9-2.2-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4z" />
+  ),
+  instagram: (
+    <>
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="3.8" />
+      <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor" stroke="none" />
+    </>
+  ),
+  globe: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18" />
+    </>
+  ),
+};
 
 /** CTA final sobre imagen, como el cierre de la referencia. */
 export function Contact() {
-  const [sent, setSent] = useState(false);
-
   return (
     <section id="contacto" className="relative overflow-hidden bg-ink">
       <div className="grade absolute inset-0" aria-hidden="true">
@@ -34,46 +51,78 @@ export function Contact() {
           </p>
         </Reveal>
 
-        <Reveal delay={0.18}>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              e.currentTarget.reset();
-              setSent(true);
-            }}
-            className="mx-auto mt-12 flex max-w-xl flex-col gap-3 sm:flex-row"
-          >
-            <label htmlFor="email" className="sr-only">
-              Correo electrónico
-            </label>
-            <input
-              id="email"
-              type="email"
-              name="email"
-              required
-              placeholder="tu@correo.com"
-              className="min-h-14 flex-1 rounded-full border border-bone/25 bg-bone/5 px-6 text-bone placeholder:text-bone/35 focus:border-lime focus:outline-none"
-            />
-            <button
-              type="submit"
-              className="label min-h-14 cursor-pointer rounded-full bg-lime px-8 text-ink transition-transform duration-300 hover:scale-105 active:scale-100"
-            >
-              Solicitar visita
-            </button>
-          </form>
-        </Reveal>
+        {/* Tres vías directas. Se llenan de lima al pasar el ratón, igual
+            que las tarjetas de servicios. */}
+        <div className="mx-auto mt-14 grid max-w-4xl gap-4 sm:grid-cols-3">
+          {CONTACT_LINKS.map((c, i) => (
+            <Reveal key={c.kind} delay={0.18 + i * 0.08} className="h-full">
+              <motion.a
+                href={c.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial="rest"
+                animate="rest"
+                whileHover="hover"
+                whileFocus="hover"
+                whileTap={{ scale: 0.98 }}
+                className="relative flex h-full min-h-[9.5rem] flex-col items-center justify-center gap-3 overflow-hidden rounded-sm border border-bone/20 px-5 py-8"
+              >
+                <motion.span
+                  aria-hidden="true"
+                  variants={{ rest: { scaleY: 0 }, hover: { scaleY: 1 } }}
+                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  style={{ originY: 1 }}
+                  className="absolute inset-0 bg-lime"
+                />
 
-        {/* Confirmación junto al formulario, no perdida arriba del todo */}
-        {sent && (
-          <motion.p
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            role="status"
-            className="label mt-6 text-lime"
-          >
-            Recibido. Te escribimos en menos de 48 h.
-          </motion.p>
-        )}
+                <motion.span
+                  variants={{ rest: { color: 'rgb(198,241,157)' }, hover: { color: 'rgb(10,19,12)' } }}
+                  transition={{ duration: 0.3 }}
+                  className="relative"
+                >
+                  <svg
+                    width="30"
+                    height="30"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    {ICONOS[c.icon]}
+                  </svg>
+                </motion.span>
+
+                <motion.span
+                  variants={{ rest: { color: 'rgb(245,244,242)' }, hover: { color: 'rgb(10,19,12)' } }}
+                  transition={{ duration: 0.3 }}
+                  className="display relative text-xl"
+                >
+                  {c.kind}
+                </motion.span>
+
+                <motion.span
+                  variants={{
+                    rest: { color: 'rgba(245,244,242,0.55)' },
+                    hover: { color: 'rgba(10,19,12,0.7)' },
+                  }}
+                  transition={{ duration: 0.3 }}
+                  className="label relative"
+                >
+                  {c.handle}
+                </motion.span>
+              </motion.a>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal delay={0.45}>
+          <p className="label mt-10 text-bone/40">
+            Primera visita y lectura del terreno sin coste
+          </p>
+        </Reveal>
       </div>
     </section>
   );

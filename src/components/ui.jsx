@@ -1,12 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
-import {
-  animate,
-  motion,
-  useInView,
-  useScroll,
-  useTransform,
-  useReducedMotion,
-} from 'motion/react';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform, useReducedMotion } from 'motion/react';
 
 /** Etiqueta mono entre corchetes — el tic visual del sistema. */
 export function Label({ children, tone = 'lime', className = '' }) {
@@ -59,41 +52,6 @@ export function MaskReveal({ children, delay = 0, className = '' }) {
       >
         {children}
       </motion.span>
-    </span>
-  );
-}
-
-/**
- * Cifra que cuenta hacia arriba al entrar en pantalla.
- * Acepta formatos como "120+", "-64%" o "18": separa signo, número y sufijo
- * para animar solo la parte numérica.
- */
-export function Counter({ value, className = '' }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-15% 0px' });
-  const reduced = useReducedMotion();
-
-  const target = Math.abs(parseFloat(value.replace(/[^\d.-]/g, '')) || 0);
-  const sign = value.trim().startsWith('-') ? '-' : '';
-  const suffix = value.replace(/^-?[\d.]+/, '');
-
-  const [shown, setShown] = useState(reduced ? target : 0);
-
-  useEffect(() => {
-    if (!inView || reduced) return;
-    const controls = animate(0, target, {
-      duration: 1.6,
-      ease: [0.16, 1, 0.3, 1],
-      onUpdate: (v) => setShown(Math.round(v)),
-    });
-    return () => controls.stop();
-  }, [inView, target, reduced]);
-
-  return (
-    <span ref={ref} className={`tabular-nums ${className}`}>
-      {sign}
-      {shown}
-      {suffix}
     </span>
   );
 }
@@ -233,5 +191,3 @@ export function SectionHead({ label, title, children, tone = 'bone', className =
     </div>
   );
 }
-
-export { useInView };
