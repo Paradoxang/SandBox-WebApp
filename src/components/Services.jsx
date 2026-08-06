@@ -1,3 +1,4 @@
+import { motion } from 'motion/react';
 import { SERVICES, PROCESS } from '../data/site';
 import { ArrowButton, Img, Label, Reveal, SectionHead } from './ui';
 
@@ -14,8 +15,10 @@ export default function Services() {
         <div className="mt-14 grid gap-5 lg:grid-cols-2">
           {SERVICES.map((s, i) => (
             <Reveal key={s.tag} delay={i * 0.1}>
-              <a
+              <motion.a
                 href="#contacto"
+                whileHover={{ y: -8 }}
+                transition={{ type: 'spring', stiffness: 260, damping: 24 }}
                 className="group relative block overflow-hidden rounded-sm bg-ink"
               >
                 <Img
@@ -38,7 +41,7 @@ export default function Services() {
                     <p className="mt-4 max-w-md text-sm leading-relaxed text-bone/65">{s.desc}</p>
                   </div>
                 </div>
-              </a>
+              </motion.a>
             </Reveal>
           ))}
         </div>

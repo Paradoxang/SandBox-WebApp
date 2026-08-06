@@ -1,5 +1,5 @@
 import { PROJECTS, JOURNAL } from '../data/site';
-import { ArrowButton, Img, Label, Reveal, SectionHead } from './ui';
+import { ArrowButton, Label, ParallaxImg, Reveal, SectionHead } from './ui';
 
 /**
  * Carrusel de proyectos.
@@ -30,14 +30,12 @@ export default function Projects() {
             href="#contacto"
             className="group w-[78vw] shrink-0 snap-start sm:w-[46vw] lg:w-[30vw] xl:w-[24rem]"
           >
-            <div className="overflow-hidden rounded-sm">
-              <Img
-                src={p.img}
-                alt={`${p.title}, ${p.place}`}
-                ratio="3/4"
-                className="transition-transform duration-700 group-hover:scale-105"
-              />
-            </div>
+            <ParallaxImg
+              src={p.img}
+              alt={`${p.title}, ${p.place}`}
+              ratio="3/4"
+              className="rounded-sm"
+            />
             <div className="mt-5 flex items-start justify-between gap-4">
               <div>
                 <Label>{p.tag.toUpperCase()}</Label>

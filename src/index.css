@@ -88,6 +88,38 @@
     text-wrap: balance;
   }
 
+  /* ------------------------------------------------------------
+     Grado de color verde.
+     Unifica fotos de stock de orígenes distintos: baja la saturación
+     original y superpone el verde de marca en modo `color`, que toma
+     tono y saturación de la capa y conserva la luminosidad de la foto.
+     El resultado es que todas parecen de la misma sesión.
+     ------------------------------------------------------------ */
+  .grade {
+    position: relative;
+    isolation: isolate;
+  }
+  .grade img {
+    filter: saturate(0.68) contrast(1.06) brightness(0.94);
+  }
+  .grade::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #1d4526;
+    mix-blend-mode: color;
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  /* Variante suave para el hero, que ya lleva sus propios velos */
+  .grade--soft::after {
+    opacity: 0.32;
+  }
+  .grade--soft img {
+    filter: saturate(0.8) contrast(1.04);
+  }
+
   /* Contenedor de página con márgenes fluidos */
   .shell {
     width: 100%;

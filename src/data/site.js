@@ -4,8 +4,12 @@
 const u = (id, w = 1200) =>
   `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=75`;
 
-// El hero es la única imagen crítica: se precarga en index.html y en el loader.
-export const HERO_IMG = u('1585320806297-9794b3e4eeae', 1920);
+// Hero propio (render de IA). Es la única imagen crítica: se precarga en
+// index.html y en el loader. El original de 1024² pesaba 1,2 MB en PNG; en
+// WebP baja a 92 kB, y la variante de 640 a 40 kB para móvil.
+export const HERO_IMG = '/hero-1024.webp';
+export const HERO_SRCSET = '/hero-640.webp 640w, /hero-1024.webp 1024w';
+export const HERO_SIZES = '(max-width: 1024px) 92vw, 46vw';
 
 export const NAV_LINKS = [
   { label: 'Prácticas', href: '#practicas' },

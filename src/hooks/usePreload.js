@@ -7,7 +7,10 @@ import { useEffect, useState } from 'react';
  * que el 100% significa que el contenido de la primera pantalla ya está en
  * caché y aparece sin saltos ni parpadeos.
  *
- * @param {string[]} sources  URLs a descargar antes de mostrar la página.
+ * @param {(string|{src:string,srcset?:string,sizes?:string})[]} sources
+ *        Recursos a descargar. Si se pasan `srcset` y `sizes`, el navegador
+ *        elige el mismo candidato que renderizará después, de modo que la
+ *        precarga sea un acierto de caché y no una descarga desperdiciada.
  * @param {number}   minMs    Tiempo mínimo en pantalla, para que el loader no
  *                            parpadee cuando todo viene de caché.
  */
@@ -47,11 +50,16 @@ export function usePreload(sources, minMs = 900) {
       return;
     }
 
-    const imgs = sources.map((src) => {
+    const imgs = sources.map((entry) => {
+      const { src, srcset, sizes } = typeof entry === 'string' ? { src: entry } : entry;
       const img = new Image();
       // onerror también avanza: una imagen caída no puede bloquear la página.
       img.onload = step;
       img.onerror = step;
+      // sizes antes que srcset, y src el último: así el selector de candidato
+      // tiene todos los datos cuando arranca la descarga.
+      if (sizes) img.sizes = sizes;
+      if (srcset) img.srcset = srcset;
       img.src = src;
       return img;
     });

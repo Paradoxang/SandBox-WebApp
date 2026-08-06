@@ -9,13 +9,14 @@ export function Contact() {
 
   return (
     <section id="contacto" className="relative overflow-hidden bg-ink">
-      <img
-        src="https://images.unsplash.com/photo-1444858291040-58f756a3bdd6?auto=format&fit=crop&w=1600&q=70"
-        alt=""
-        aria-hidden="true"
-        loading="lazy"
-        className="absolute inset-0 size-full object-cover opacity-25"
-      />
+      <div className="grade absolute inset-0" aria-hidden="true">
+        <img
+          src="https://images.unsplash.com/photo-1444858291040-58f756a3bdd6?auto=format&fit=crop&w=1600&q=70"
+          alt=""
+          loading="lazy"
+          className="size-full object-cover opacity-25"
+        />
+      </div>
       <div className="absolute inset-0 bg-gradient-to-b from-ink/85 via-ink/70 to-ink" />
 
       <div className="shell relative py-[clamp(5rem,15vw,12rem)] text-center">

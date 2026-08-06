@@ -37,6 +37,18 @@ src/
 public/demo-mala/        La demo antigua de mal responsive (ver abajo)
 ```
 
+## Imágenes
+
+El hero es un render propio de una isla flotante de tierra con helechos y raíces. Llega como PNG cuadrado de 1024² y 1,2 MB; el original vive en `assets-src/` (fuera de lo que se sirve) y en `public/` solo entran las variantes WebP de **92 kB** y **40 kB**, servidas por `srcset`. Es un 92 % menos de peso.
+
+No se usa como fondo a sangre completa —`object-cover` recortaría el sujeto— sino como objeto flotante sobre fondo oscuro, con halo radial detrás, flotación continua, parallax al hacer scroll e inclinación 3D siguiendo al puntero.
+
+Las fotos de stock pasan por un **grado de color verde** (`.grade` en `index.css`): se les baja la saturación y se superpone el verde de marca en `mix-blend-mode: color`, que toma tono y saturación de la capa y conserva la luminosidad de la foto. Así fotos de orígenes distintos parecen de la misma sesión.
+
+## Animación
+
+Con `motion` (Framer Motion): revelado de titulares por máscara, texto que se ilumina palabra a palabra con el scroll, contadores que suben al entrar en pantalla, parallax en las imágenes de proyectos, barra de progreso de lectura, cinta infinita, muelles en botones y tarjetas, y entrada escalonada de secciones. Todo se desactiva con `prefers-reduced-motion`.
+
 ## Pantalla de precarga
 
 El contador **no es decorativo**. `usePreload` descarga las imágenes de la primera pantalla y cuenta cada una al terminar (o al fallar, para que una imagen caída no bloquee la página), espera además a `document.fonts.ready` para evitar el salto de tipografía, y solo entonces retira el telón. Cuando llega a 100, el contenido visible ya está en caché y entra sin parpadeos.
@@ -69,7 +81,7 @@ Sirve de contraste directo con la portada.
 
 ## Notas de implementación
 
-`AnimatePresence` de motion 13 ejecuta la animación de salida pero no retira el nodo del DOM. En el menú móvil eso dejaba un overlay invisible cubriendo la pantalla entera y capturando todos los toques. El proyecto no lo usa: el montaje y desmontaje se controlan con estado y temporizador.
+El proyecto no usa `AnimatePresence`: el montaje y desmontaje del preloader y del menú móvil se controlan con estado y temporizador, sin depender de que la librería avise de que la animación de salida terminó. Es equivalente en pantalla y no deja overlays enganchados si el navegador suspende los fotogramas (una pestaña en segundo plano, por ejemplo).
 
 ## Créditos
 
