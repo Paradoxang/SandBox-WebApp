@@ -83,6 +83,12 @@ export const PRACTICES = [
   },
 ];
 
+// Las dos tarjetas de servicios son las imágenes más grandes del sitio.
+// Para sustituir el stock por renders propios: deja los PNG en assets-src/
+// con los nombres `servicio-diseno` y `servicio-mantenimiento`, ejecuta
+// `npm run media` y cambia cada `img` por su ruta local, p. ej.:
+//   img: '/servicio-diseno-1200.webp',
+//   srcset: '/servicio-diseno-800.webp 800w, /servicio-diseno-1200.webp 1200w',
 export const SERVICES = [
   {
     tag: 'Diseño y obra',

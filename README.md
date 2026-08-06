@@ -43,6 +43,14 @@ El hero es un render propio de una isla flotante de tierra con helechos y raíce
 
 No se usa como fondo a sangre completa —`object-cover` recortaría el sujeto— sino como objeto flotante sobre fondo oscuro, con halo radial detrás, flotación continua, parallax al hacer scroll e inclinación 3D siguiendo al puntero.
 
+Para añadir imágenes propias: déjalas en `assets-src/`, dales uno de los nombres registrados en `scripts/optimize-media.mjs` y ejecuta
+
+```bash
+npm run media
+```
+
+Recorta al encuadre correcto (buscando la zona con más detalle, para que el sujeto no se pierda al pasar de cuadrado a apaisado) y escribe las variantes WebP en `public/`. Los originales pesados nunca llegan al navegador ni al build.
+
 Las fotos de stock pasan por un **grado de color verde** (`.grade` en `index.css`): se les baja la saturación y se superpone el verde de marca en `mix-blend-mode: color`, que toma tono y saturación de la capa y conserva la luminosidad de la foto. Así fotos de orígenes distintos parecen de la misma sesión.
 
 ## Animación
