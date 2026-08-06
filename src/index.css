@@ -1,0 +1,126 @@
+@import 'tailwindcss';
+
+/* ============================================================
+   Sistema de diseño — Raíz & Hoja
+   Paleta derivada de la referencia: verde profundo + lima.
+   Patrón: Immersive/Interactive · Estilo: Exaggerated Minimalism
+   ============================================================ */
+@theme {
+  --color-ink: #0a130c;
+  --color-forest: #0f1f10;
+  --color-moss: #17301a;
+  --color-lime: #c6f19d;
+  --color-limedim: #9fcf69;
+  --color-pale: #d5eebc;
+  --color-bone: #f5f4f2;
+  --color-clay: #cc8343;
+
+  --font-display: 'Geist', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, 'Cascadia Code', monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    /* Lenis controla el scroll; el nativo se desactiva para no pelear con él */
+    scroll-behavior: auto;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-bone);
+    font-family: var(--font-display);
+    font-synthesis-weight: none;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+
+  /* Foco visible siempre — nunca se elimina el anillo */
+  :focus-visible {
+    outline: 2px solid var(--color-lime);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: var(--color-lime);
+    color: var(--color-ink);
+  }
+
+  /* Lenis */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+}
+
+@layer components {
+  /* Etiqueta mono en corchetes, el tic visual de la referencia.
+     12px es el suelo: por debajo deja de ser legible en pantalla pequeña. */
+  .label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1.1;
+  }
+
+  /* Cualquier cosa que se toque cumple los 44px de alto mínimo */
+  .tap {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  /* Titular de display: enorme, muy apretado */
+  .display {
+    font-weight: 500;
+    letter-spacing: -0.035em;
+    line-height: 0.95;
+    text-wrap: balance;
+  }
+
+  /* Contenedor de página con márgenes fluidos */
+  .shell {
+    width: 100%;
+    max-width: 90rem;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 5vw, 5rem);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  /* Los carruseles se arrastran, no se seleccionan */
+  .no-select {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .hide-scrollbar {
+    scrollbar-width: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Respeto total a quien pide menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

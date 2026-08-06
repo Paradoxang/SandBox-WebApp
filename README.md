@@ -1,8 +1,8 @@
-# 🌿 Raíz & Hoja — demo de jardinería
+# 🌿 Raíz & Hoja — estudio de paisajismo
 
-Landing sobre jardinería y tipos de prácticas jardineras, hecha con **Vite** (vanilla JS + CSS, sin frameworks).
+Landing de un estudio de paisajismo, construida con **React + Vite 8**, **Tailwind CSS v4**, **motion** (Framer Motion) y **Lenis**.
 
-Su propósito real es didáctico: **el escritorio está bien hecho y el móvil está roto a propósito**, para poder comparar los dos lado a lado y señalar antipatrones concretos de diseño responsive.
+El diseño se inspira en [alethia.earth](https://www.alethia.earth/): verde profundo con acento lima, tipografía Geist, etiquetas mono entre corchetes, titulares de display muy apretados y scroll suave con revelados progresivos.
 
 ## Arrancar
 
@@ -13,36 +13,64 @@ npm run dev
 
 Abre http://localhost:5173
 
-## Qué incluye
+## Estructura
 
-- Hero a pantalla completa con overlay en degradado
-- 6 prácticas jardineras: huerto orgánico, permacultura, xerojardinería, jardín vertical, bosque comestible y poda ornamental
-- Galería del ciclo del jardín (semillero → floración → cosecha → compost)
-- Calendario de siembra por estación
-- Consejos y formulario de newsletter (demo, no envía nada)
-- 11 imágenes de stock de Unsplash
-- Animaciones de entrada con `IntersectionObserver` y scroll suave
+```
+index.html               Entrada React + preconnect y preload de recursos críticos
+src/
+  App.jsx                Composición de la página
+  index.css              Tokens de diseño (@theme), capas base y utilidades
+  data/site.js           Todo el contenido, separado del layout
+  hooks/
+    usePreload.js        Precarga real de imágenes con progreso
+    useLenis.js          Scroll suave
+  components/
+    Preloader.jsx        Pantalla de carga
+    Nav.jsx              Navegación + menú móvil a pantalla completa
+    Hero.jsx             Hero con parallax + cinta infinita
+    Manifesto.jsx        Texto que se revela palabra a palabra al hacer scroll
+    Practices.jsx        Seis prácticas jardineras
+    Services.jsx         Servicios + proceso en cuatro pasos
+    Projects.jsx         Carrusel de proyectos + diario
+    Footer.jsx           CTA de contacto + pie con wordmark gigante
+    ui.jsx               Primitivas compartidas
+public/demo-mala/        La demo antigua de mal responsive (ver abajo)
+```
 
-## ⚠️ El móvil está mal a propósito
+## Pantalla de precarga
 
-Todos los antipatrones viven en un único bloque comentado y numerado al final de [`src/style.css`](src/style.css), bajo `@media (max-width: 480px)`, para poder señalarlos uno a uno.
+El contador **no es decorativo**. `usePreload` descarga las imágenes de la primera pantalla y cuenta cada una al terminar (o al fallar, para que una imagen caída no bloquee la página), espera además a `document.fonts.ready` para evitar el salto de tipografía, y solo entonces retira el telón. Cuando llega a 100, el contenido visible ya está en caché y entra sin parpadeos.
 
-Medido en un viewport de 375 px:
+Complementos: `preconnect` y `preload` de fuente y hero en el HTML, `motion` en su propio chunk, y `lazy loading` en las 15 imágenes que no son el hero.
 
-| Antipatrón | Efecto real |
-|---|---|
-| `user-scalable=no` en el viewport | El usuario no puede hacer zoom para escapar |
-| Anchos fijos en `px` | 1531 px de desbordamiento horizontal (body de 1906 px en pantalla de 375 px) |
-| La rejilla no colapsa | Las 6 tarjetas quedan en una sola fila de 1832 px |
-| Tipografía sin escalar | `h1` a 58 px dentro de un contenedor de 320 px |
-| Zonas táctiles minúsculas | Enlaces de navegación de 14 px de alto (el mínimo recomendado es 44 px) |
-| Elementos `fixed` de 1280 px | Nav y footer tapan el contenido |
-| Información solo en `:hover` | El texto de las tarjetas queda con `opacity: 0`, invisible en táctil |
-| Breakpoint mal elegido (480 px) | Tablets y móviles grandes se quedan con el layout de escritorio comprimido |
-| Tabla sin scroll contenido | `word-break: break-all` a 7 px, ilegible |
+Hay dos salvaguardas: si la red se atasca, un temporizador de 6 s entra igualmente; y el desmontaje del telón va por temporizador propio, no por el callback de la librería.
 
-Para verlo: DevTools → modo dispositivo → 375 px, o redimensiona la ventana por debajo de 480 px.
+## Diseño responsive
+
+Verificado por medición a 375, 768 y 1440 px:
+
+- 0 px de desbordamiento horizontal en los tres tamaños
+- 0 zonas táctiles por debajo de 44×44 px
+- 0 textos por debajo de 12 px
+- Contraste mínimo 4.73:1 (AA)
+- Nada depende de `:hover` — en móvil las prácticas son tarjetas con la imagen siempre visible
+- `prefers-reduced-motion` desactiva Lenis y todas las animaciones
+- Foco visible en todo elemento enfocable, menú móvil con `inert` y `aria-hidden` al cerrarse
+
+## ⚠️ La demo de mal responsive
+
+La versión anterior del proyecto tenía el móvil roto **a propósito** como material didáctico. Se conserva íntegra en:
+
+**http://localhost:5173/demo-mala/index.html** (enlace también en el pie)
+
+Los antipatrones están aislados y numerados en `public/demo-mala/style.css`, bajo `@media (max-width: 480px)`. Medidos a 375 px: 1531 px de desbordamiento, `h1` de 58 px en un contenedor de 320 px, zonas táctiles de 14 px, las 6 tarjetas en una fila de 1832 px, y el texto de las tarjetas solo visible en `:hover`.
+
+Sirve de contraste directo con la portada.
+
+## Notas de implementación
+
+`AnimatePresence` de motion 13 ejecuta la animación de salida pero no retira el nodo del DOM. En el menú móvil eso dejaba un overlay invisible cubriendo la pantalla entera y capturando todos los toques. El proyecto no lo usa: el montaje y desmontaje se controlan con estado y temporizador.
 
 ## Créditos
 
-Imágenes de stock vía [Unsplash](https://unsplash.com).
+Imágenes de stock vía [Unsplash](https://unsplash.com). Tipografía [Geist](https://vercel.com/font).

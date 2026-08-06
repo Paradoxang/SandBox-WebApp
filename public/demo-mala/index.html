@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- ⚠️ ANTIPATRÓN 0: se bloquea el zoom del usuario. La página se
+         desborda y encima el usuario no puede pellizcar para escapar. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>Raíz &amp; Hoja — Jardinería consciente</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header class="nav">
+      <a class="nav__logo" href="#inicio">🌿 Raíz &amp; Hoja</a>
+      <nav class="nav__links">
+        <a href="#practicas">Prácticas</a>
+        <a href="#galeria">Galería</a>
+        <a href="#calendario">Calendario</a>
+        <a href="#consejos">Consejos</a>
+      </nav>
+      <a class="nav__cta" href="#newsletter">Empezar a plantar</a>
+    </header>
+
+    <main>
+      <section class="hero" id="inicio">
+        <div class="hero__media">
+          <img
+            src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&w=1920&q=80"
+            alt="Jardín frondoso iluminado por el sol"
+          />
+        </div>
+        <div class="hero__content">
+          <span class="eyebrow">Jardinería consciente</span>
+          <h1>Cultiva un jardín que respire contigo</h1>
+          <p>
+            Técnicas, calendarios y prácticas sostenibles para transformar cualquier
+            rincón —un balcón, un patio o media hectárea— en un ecosistema vivo.
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#practicas">Ver prácticas</a>
+            <a class="btn btn--ghost" href="#calendario">Calendario de siembra</a>
+          </div>
+          <ul class="hero__stats">
+            <li><strong>12</strong><span>prácticas guiadas</span></li>
+            <li><strong>4</strong><span>estaciones cubiertas</span></li>
+            <li><strong>0</strong><span>químicos necesarios</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section" id="practicas">
+        <div class="section__head">
+          <span class="eyebrow">Tipos de práctica</span>
+          <h2>Encuentra tu forma de cultivar</h2>
+          <p>Cada jardín pide algo distinto. Estas son las escuelas más útiles para empezar.</p>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&w=800&q=80" alt="Huerto orgánico con verduras" />
+            <div class="card__body">
+              <h3>Huerto orgánico</h3>
+              <p>Compost, rotación de cultivos y control biológico de plagas. Suelo vivo antes que fertilizante.</p>
+              <span class="tag tag--green">Comestible</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=800&q=80" alt="Diseño en permacultura" />
+            <div class="card__body">
+              <h3>Permacultura</h3>
+              <p>Diseño por zonas y capas. El jardín imita al bosque: cada elemento cumple varias funciones.</p>
+              <span class="tag tag--earth">Diseño</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=800&q=80" alt="Plantas suculentas en jardín seco" />
+            <div class="card__body">
+              <h3>Xerojardinería</h3>
+              <p>Especies nativas y de bajo riego, mulch profundo y sombra estratégica. Menos agua, más resistencia.</p>
+              <span class="tag tag--sand">Clima seco</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1459156212016-c812468e2115?auto=format&fit=crop&w=800&q=80" alt="Jardín vertical en pared" />
+            <div class="card__body">
+              <h3>Jardín vertical</h3>
+              <p>Para balcones y muros. Sustrato ligero, riego por goteo y plantas de raíz corta.</p>
+              <span class="tag tag--green">Espacios pequeños</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?auto=format&fit=crop&w=800&q=80" alt="Bosque comestible" />
+            <div class="card__body">
+              <h3>Bosque comestible</h3>
+              <p>Árboles, arbustos y cubiertas en siete estratos. Alta inversión inicial, cosecha por décadas.</p>
+              <span class="tag tag--earth">Largo plazo</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1467043198406-dc953a3defa0?auto=format&fit=crop&w=800&q=80" alt="Bonsái y jardinería japonesa" />
+            <div class="card__body">
+              <h3>Poda ornamental</h3>
+              <p>Bonsái, topiaria y guía de ramas. Paciencia, herramienta limpia y cortes en el nudo correcto.</p>
+              <span class="tag tag--sand">Detalle</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="band" id="galeria">
+        <div class="band__text">
+          <span class="eyebrow">Galería</span>
+          <h2>El jardín en cuatro momentos</h2>
+          <p>Del semillero al compost, el ciclo nunca se detiene.</p>
+        </div>
+        <div class="gallery">
+          <figure><img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=600&q=80" alt="Semilleros" /><figcaption>Semillero</figcaption></figure>
+          <figure><img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=600&q=80" alt="Floración" /><figcaption>Floración</figcaption></figure>
+          <figure><img src="https://images.unsplash.com/photo-1471193945509-9ad0617afabf?auto=format&fit=crop&w=600&q=80" alt="Cosecha" /><figcaption>Cosecha</figcaption></figure>
+          <figure><img src="https://images.unsplash.com/photo-1444858291040-58f756a3bdd6?auto=format&fit=crop&w=600&q=80" alt="Compost y hojas" /><figcaption>Compost</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="section" id="calendario">
+        <div class="section__head">
+          <span class="eyebrow">Calendario</span>
+          <h2>Qué hacer en cada estación</h2>
+          <p>Referencia general para clima templado del hemisferio norte.</p>
+        </div>
+        <table class="calendar">
+          <thead>
+            <tr><th>Estación</th><th>Siembra</th><th>Suelo</th><th>Riego</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Primavera</td><td>Tomate, albahaca, lechuga</td><td>Airear y añadir compost</td><td>Moderado, por la mañana</td></tr>
+            <tr><td>Verano</td><td>Calabacín, pimiento, girasol</td><td>Mulch de 5 cm</td><td>Profundo, 2× por semana</td></tr>
+            <tr><td>Otoño</td><td>Ajo, habas, espinaca</td><td>Abono verde</td><td>Reducir a la mitad</td></tr>
+            <tr><td>Invierno</td><td>Planificación y esquejes</td><td>Cubrir y descansar</td><td>Mínimo</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section section--tips" id="consejos">
+        <div class="section__head">
+          <span class="eyebrow">Consejos</span>
+          <h2>Cinco reglas que no fallan</h2>
+        </div>
+        <ol class="tips">
+          <li><strong>Riega el suelo, no la hoja.</strong> La humedad en las hojas invita al hongo.</li>
+          <li><strong>Observa antes de intervenir.</strong> Quince minutos al día valen más que un fertilizante.</li>
+          <li><strong>Todo residuo vegetal vuelve al jardín.</strong> El compost cierra el círculo.</li>
+          <li><strong>Planta nativo primero.</strong> Menos agua, menos plagas, más polinizadores.</li>
+          <li><strong>Deja una esquina sin tocar.</strong> Ahí vive el control de plagas gratis.</li>
+        </ol>
+      </section>
+
+      <section class="newsletter" id="newsletter">
+        <h2>Una guía por estación en tu correo</h2>
+        <p>Sin spam. Solo qué sembrar, qué podar y qué dejar en paz.</p>
+        <form class="newsletter__form" id="newsletter-form">
+          <input type="email" placeholder="tu@correo.com" aria-label="Correo electrónico" required />
+          <button class="btn btn--primary" type="submit">Suscribirme</button>
+        </form>
+        <p class="newsletter__msg" id="newsletter-msg" hidden>¡Listo! Te escribimos al inicio de la próxima estación. 🌱</p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>🌿 Raíz &amp; Hoja</span>
+      <span>Demo de jardinería · Imágenes de stock vía Unsplash</span>
+    </footer>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
